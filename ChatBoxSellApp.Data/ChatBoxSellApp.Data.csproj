@@ -1,0 +1,101 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{3147471A-0235-476F-A190-CF8AB228F8DC}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ChatBoxSellApp.Data</RootNamespace>
+    <AssemblyName>ChatBoxSellApp.Data</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="DataDBContext\AspNetRole.cs" />
+    <Compile Include="DataDBContext\AspNetUser.cs" />
+    <Compile Include="DataDBContext\AspNetUserClaim.cs" />
+    <Compile Include="DataDBContext\AspNetUserLogin.cs" />
+    <Compile Include="DataDBContext\AspNetUserRole.cs" />
+    <Compile Include="DataDBContext\chatagent2.cs" />
+    <Compile Include="DataDBContext\chatclient.cs" />
+    <Compile Include="DataDBContext\ChatLine.cs" />
+    <Compile Include="DataDBContext\Customer.cs" />
+    <Compile Include="DataDBContext\DataChatBox.cs" />
+    <Compile Include="DataDBContext\Setting.cs" />
+    <Compile Include="DataDBContext\StoreProduce.cs" />
+    <Compile Include="DataDBContext\Visitor.cs" />
+    <Compile Include="Migrations\201810270338566_initialDB.cs" />
+    <Compile Include="Migrations\201810270338566_initialDB.Designer.cs">
+      <DependentUpon>201810270338566_initialDB.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\IAccountResponsitory.cs" />
+    <Compile Include="Repositories\IAspNetRoleResponsitory.cs" />
+    <Compile Include="Repositories\IAspNetUserClaimResponsitory.cs" />
+    <Compile Include="Repositories\IAspNetUserLoginResponsitory.cs" />
+    <Compile Include="Repositories\IChatLineResponsitory.cs" />
+    <Compile Include="Repositories\ICustomerResponsitory.cs" />
+    <Compile Include="Repositories\IDataBase.cs" />
+    <Compile Include="Repositories\IRolesResponsitory.cs" />
+    <Compile Include="Repositories\ISettingResponsitory.cs" />
+    <Compile Include="Repositories\IVisitorResponsitory.cs" />
+    <Compile Include="Repositories\StoreProduce.cs" />
+    <Compile Include="Repositories\UnitOfWork.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201810270338566_initialDB.resx">
+      <DependentUpon>201810270338566_initialDB.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
