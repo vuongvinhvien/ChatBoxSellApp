@@ -9,6 +9,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using ChatBoxSellApp.Web.Models;
+using ChatBoxSellApp.Web.Services;
 
 namespace ChatBoxSellApp.Web.Controllers
 {
@@ -17,12 +18,22 @@ namespace ChatBoxSellApp.Web.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+        //private readonly IAccountServices _Account;
+        //private readonly IIdentityMessageService _Mail;
+        //private readonly ICustomerServices _Customer;
+        //private readonly ISettingServices _Setting;
+        //private readonly IRolesServices _Role;
 
-        public AccountController()
-        {
-        }
+        //public AccountController(IRolesServices Role, IAccountServices Account, IIdentityMessageService Mail, ICustomerServices Customer, ISettingServices Setting)
+        //{
+        //    _Account = Account;
+        //    _Mail = Mail;
+        //    _Customer = Customer;
+        //    _Setting = Setting;
+        //    _Role = Role;
+        //}
 
-        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
+        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
         {
             UserManager = userManager;
             SignInManager = signInManager;
