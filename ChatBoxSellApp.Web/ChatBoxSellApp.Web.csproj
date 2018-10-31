@@ -177,6 +177,10 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\AccountServices.cs" />
+    <Compile Include="Services\CustomerServices.cs" />
+    <Compile Include="Services\RolesServices.cs" />
+    <Compile Include="Services\SettingServices.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -245,6 +249,12 @@
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ChatBoxSellApp.Data\ChatBoxSellApp.Data.csproj">
+      <Project>{3147471A-0235-476F-A190-CF8AB228F8DC}</Project>
+      <Name>ChatBoxSellApp.Data</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
