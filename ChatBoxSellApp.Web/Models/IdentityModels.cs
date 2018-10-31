@@ -16,6 +16,10 @@ namespace ChatBoxSellApp.Web.Models
             // Add custom user claims here
             return userIdentity;
         }
+        public string ID_Customer { get; set; }
+        public string Avartar { get; set; }
+        public bool? IsMain { get; set; }
+        public bool? status { get; set; }
     }
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
