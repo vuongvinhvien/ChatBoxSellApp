@@ -10,6 +10,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using ChatBoxSellApp.Web.Models;
 using ChatBoxSellApp.Web.Services;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace ChatBoxSellApp.Web.Controllers
 {
@@ -18,29 +19,40 @@ namespace ChatBoxSellApp.Web.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
-        //private ApplicationSignInManager _signInManager;
-        //private ApplicationUserManager _userManager;
-        //private readonly IAccountServices _Account;
-        //private readonly IIdentityMessageService _Mail;
-        //private readonly ICustomerServices _Customer;
-        //private readonly ISettingServices _Setting;
+        private ApplicationRoleManager roleManager;
+
+        private readonly IAccountServices _Account;
+        private readonly IIdentityMessageService _Mail;
+        private readonly ICustomerServices _Customer;
+        private readonly ISettingServices _Setting;
 
 
-        //public AccountController(IAccountServices Account, IIdentityMessageService Mail, ICustomerServices Customer, ISettingServices Setting)
-        //{
-        //    _Account = Account;
-        //    _Mail = Mail;
-        //    _Customer = Customer;
-        //    _Setting = Setting;
-        //}
+        public AccountController(IAccountServices Account, IIdentityMessageService Mail, ICustomerServices Customer, ISettingServices Setting)
+        {
+            _Account = Account;
+            _Mail = Mail;
+            _Customer = Customer;
+            _Setting = Setting;
+        }
         public AccountController()
         {
+
         }
 
         public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
         {
             UserManager = userManager;
             SignInManager = signInManager;
+        }
+        //Add role manager
+
+        public ApplicationRoleManager RoleManager
+        {
+            get
+            {
+                return roleManager ?? HttpContext.GetOwinContext().Get<ApplicationRoleManager>();
+            }
+            private set { roleManager = value; }
         }
 
         public ApplicationSignInManager SignInManager
@@ -167,10 +179,32 @@ namespace ChatBoxSellApp.Web.Controllers
             if (ModelState.IsValid)
             {
                 var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+
+                // add fied data
+                user.ID_Customer = Guid.NewGuid().ToString();
+                user.IsMain = true;
+                user.status = true;
+
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
+                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+                    // Add field role and customerid to setting script
+
+                    //_Customer.CreatNewCustomerByNewUser(user.Id);
+
+                   // _Setting.SetDefaultSetting(user.ID_Customer, model.Email);
+
+                    string roleName = "User";
+                    // Check to see if Role Exists, if not create it
+                    if (!RoleManager.RoleExists(roleName))
+                    {
+                        RoleManager.Create(new IdentityRole(roleName));
+                    }
+                    UserManager.AddToRole(user.Id, roleName);
+
+
+                    
                     
                     // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
